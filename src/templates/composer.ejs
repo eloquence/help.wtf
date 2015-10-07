@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%- conf.siteName -%> - Compose a new cheatsheet</title>
+  <% if(process.env.NODE_ENV === 'production') { %>
+    <style>
+      <%- include('../../_static/lib/normalize.css');
+      %> <%- include('../../_static/lib/bootstrap.min.css');
+      %> <%- include('../../_static/composer.css');
+      %>
+    </style>
+    <% } else { %>
+      <link rel="stylesheet" type="text/css" href="/_static/lib/normalize.css">
+      <link rel="stylesheet" type="text/css" href="/_static/lib/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/_static/sheet.css">
+      <link rel="stylesheet" type="text/css" href="/_static/code.css">
+      <link rel="stylesheet" type="text/css" href="/_static/composer.css">
+      <% } %>
+</head>
+
+<body>
+  <a href="<%- conf.baseUrl -%>" class="directoryLink">↰ <%- conf.siteName -%></a>
+  Once you are done editing, you can submit your cheatsheet for review by the
+  <%- conf.siteName -%> team, or download the JSON source and submit it as a GitHub pull request. Fields marked with
+    <B>*</B> are required. <u>Underlined</u> letters on buttons indicate <a href="https://en.wikipedia.org/wiki/Access_key" target="_new">access keys</a>.
+    <div id="previewBanner">
+    <P>The content below is only a preview of the cheatsheet. Don't forget to submit and/or download your sheet!
+    <a href="#" id="backToEditor">Back to editor</a><P>
+    </div>
+    <div id="preview"></div>
+    <div id="editor"></div>
+    <div class="error" id="licenseWarning">You have to agree to the terms of the license, or we can't use your stuff.</div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="licenseCheckbox">I agree to make my contributions available under <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC-0 (public domain)</a>.</label>
+    </div>
+    <button id="submitButton" type="submit" class="btn btn-default" accesskey="s"><u>S</U>ubmit for review</button>
+    <a href="#" id="downloadLink"><button id="downloadButton" class="btn btn-default" accesskey="d"><u>D</u>ownload a copy</button></a>
+    <button id="previewButton" class="btn btn-default" accesskey="p"><u>P</u>review</button>
+    <div class="message" id="successMessage">
+    <br>Thank you for submitting a new cheatsheet to <%- conf.siteName -%>! If you have provided an email address,
+    we will let you know once the cheatsheet is available. You can submit an updated version at any time.
+    </div>
+    <div class="error message" id="failureMessage">
+    <br>The server had a problem processing your submission. You can still download your sheet and try again
+    later.
+    </div>
+    <div class="notice">
+    <P>Proudly powered by Jeremy Dorn's <a href="https://github.com/jdorn/json-editor" target="_new">JSON-editor</a>.
+    </div>
+    <script type="text/javascript" src="/_static/lib/json-editor/dist/jsoneditor.js"></script>
+    <script type="text/javascript">
+      var conf = <%- JSON.stringify(conf) -%>;
+      <%- include('../../_static/composer.js'); %>
+    </script>
+</body>
+</html>

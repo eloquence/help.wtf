@@ -1,0 +1,82 @@
+<% if (!contentOnly) { %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%- conf.siteName -%><%- htmlSubtitle %></title>
+  <% if(process.env.NODE_ENV === 'production') { %>
+  <style>
+  <%- include('../../_static/lib/normalize.css'); %>
+  <%- include('../../_static/code.css'); %>
+  <%- include('../../_static/sheet.css'); %>
+  </style>
+  <% } else { %>
+  <link rel="stylesheet" type="text/css" href="/_static/lib/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/_static/code.css">
+  <link rel="stylesheet" type="text/css" href="/_static/sheet.css">
+  <link rel="canonical" href="<%- conf.baseUrl + state.sheet -%>">
+  <% } %>
+</head>
+<body>
+  <a href="<%- conf.baseUrl -%>" class="directoryLink">↰ <%- conf.siteName -%></a>
+  <input type="text" id="searchSheets" size="40" placeholder="Search ...">
+<% } %>
+<div id="content">
+  <% if (multiColumn) { %>
+  <style>
+  #sheet {
+    columns: 40em;
+    -webkit-columns: 40em;
+    -moz-columns: 40em;
+  }
+  </style>
+  <% } %>
+  <h2 class="sheetHeading"><%- title -%></h2>
+  <% if (description) { %><h3 class="sheetSubheading"><%- description -%></h3><% } %>
+  <% if (filter) { %><div class="filter">
+    <% if (numRows) { %>
+      Filtered for '<%- filter -%>'. <%- numRows -%> out of <%- totalRows -%> rows displayed.
+    <% } else { %>
+      No rows match specified filter '<%- filter -%>'.
+    <% } %>
+  <a href="<%- conf.baseUrl + state.sheet -%>">Show complete sheet.</a></div><% } %>
+  <div id="sheet">
+    <% sections.forEach((sectionObj) => { %>
+      <div class="cheatSheetTable">
+      <% if (sectionObj.title) { %><h4 class="sectionHeading"><%- sectionObj.title -%></h4><% } %>
+        <% sectionObj.rows.forEach((row) => { %>
+          <div class="cheatSheetRow"<% if (!filter && row.anchorId) { %> id="<%- row.anchorId -%>"<% } %>>
+            <% if (!filter && row.anchorId) { %>
+            <div class="fragmentCell"><a class="fragmentLink" href="#<%- row.anchorId -%>">▶</a></div>
+            <% } %>
+            <div class="rowHeading"><%- row.title -%>
+              <div class="rowSubheading"><%- row.description %></div>
+            </div>
+            <div class="rowValue"><%- row.body %></div>
+          </div>
+        <% }); %>
+        </div>
+    <% }); %>
+  </div>
+  <div class="notice" id="footer">
+  <% if (credits && credits.length) { %>
+    By:
+    <% for (var c=0;c<credits.length;c++) { %>
+      <% if (credits[c].url) { %><a href="<%- credits[c].url -%>"><% } %>
+      <%- credits[c].name -%><% if (credits.length > 1 && c !== (credits.length - 1)) { %>, <% } %><% if (credits[c].url) { %></a><% } %>
+    <% } %>
+    <br>
+  <% } %>
+  <a href="<%- conf.baseUrl + state.sheet -%>.json">JSON source</a> &middot; <a href="https://github.com/eloquence/help.wtf">GitHub</a> &middot; <a href="<%- conf.baseUrl + '_compose' -%>">Compose a cheatsheet</a>
+  </div>
+</div>
+<% if (!contentOnly) { %>
+<script type="text/javascript">
+var conf = <%- JSON.stringify(conf) -%>;
+
+var state = <%- JSON.stringify(state) -%>;
+
+<%- include('../../_static/sheet.js'); %>
+</script>
+</body>
+</html>
+<% } %>

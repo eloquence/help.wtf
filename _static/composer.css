@@ -1,0 +1,29 @@
+#licenseWarning {
+    display: none;
+}
+#successMessage {
+    display: none;
+}
+#failureMessage {
+    display: none;
+}
+#previewBanner {
+    display: none;
+    font-size: 1.2em;
+    color: red;
+}
+
+.error {
+  color: red;
+}
+
+.message {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+textarea.form-control {
+    height: 10em;
+    font-family:monospace;
+}

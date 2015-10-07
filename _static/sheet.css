@@ -1,0 +1,228 @@
+/* Font sizes not specified here, scaled by screen width instead */
+#searchSheets {
+  width: 40em;
+  padding: 5px 15px 7px 15px;
+  border-radius: 20px;
+  border: 1px solid #9ecbe2;
+  border-top: 1px solid #b4c1cb;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+#searchSheets:focus {
+  outline: 0
+}
+@media all and (max-width: 599px) {
+  #searchSheets {
+    width: 15em;
+  }
+}
+.copyBtn {
+  display: none;
+  border: none;
+  color: white;
+  padding: 0;
+  text-transform: uppercase;
+  width: 5em;
+  height: 2.5em;
+  background-color: #426FC5;
+}
+@media print {
+  .copyBtn, .directoryLink, #searchSheets {
+    display: none !important;
+  }
+}
+.copyBtn:active {
+  background-color: #8FBCFF;
+}
+.filter {
+  font-style: italic;
+  font-size: 80%;
+  color: #999;
+}
+.sheetHeading {
+  font-family: sans-serif;
+}
+.sheetSubheading {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.sectionHeading {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.directoryLink {
+  float: right;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 1em;
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: #426FC5;
+}
+.directoryLink:hover {
+  color: white;
+  text-decoration:none;
+}
+.directoryLink:active {
+  background-color: #8FBCFF;
+}
+@media all and (max-width: 599px) {
+  body {
+    margin: 2px 5px 2px 5px;
+  }
+  .sectionHeading {
+    font-size: 1em;
+  }
+  .rowHeading {
+    font-size: 0.7em;
+  }
+  .rowValue {
+    font-size: 0.7em;
+    font-family: sans-serif;
+  }
+  .fragmentCell, .fragmentLink {
+    display: none;
+  }
+  .sheetHeading {
+    font-size: 1em;
+  }
+  .sectionHeading {
+    font-size: 0.8em;
+  }
+  .sheetSubheading {
+    font-size: 0.8em;
+  }
+  .rowHeading {
+    font-weight: bold;
+  }
+  .rowSubheading {
+    font-weight: normal;
+  }
+  .directoryLink {
+    font-size: 0.6em;
+  }
+}
+@media all and (min-width: 600px) {
+  body {
+    margin: 0.5em 1.25em 0.5em 1.25em;
+  }
+  .cheatSheetTable {
+    display: table;
+    table-layout: fixed;
+  }
+  .sectionHeading {
+    display: table-caption;
+  }
+  .cheatSheetRow {
+    display: table-row;
+  }
+  .cheatSheetRow:hover .fragmentLink {
+    color: #333;
+  }
+  .fragmentCell {
+    display: table-cell;
+    width: 1em;
+  }
+  .fragmentLink {
+    text-decoration: none;
+    padding-right: 0.5em;
+    color: white;
+  }
+  .rowHeading {
+    font-size: 1em;
+    font-family: sans-serif;
+    display: table-cell;
+    width: 15%;
+  }
+  .rowSubheading {
+    font-size: 0.9em;
+    font-weight: normal;
+    font-family: sans-serif;
+  }
+  .rowValue {
+    font-size: 1em;
+    font-family: sans-serif;
+    display: table-cell;
+    padding: 2em;
+    width: 85%;
+  }
+}
+@media all and (min-width: 1000px) {
+  body {
+    margin: 2em 5em 2em 5em;
+  }
+}
+.warning {
+  color: #c00;
+  font-size: small;
+  margin-top: 0.2em;
+}
+:target .fragmentLink {
+  animation-name: frag;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  color: red !important;
+}
+@keyframes frag {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+.notice {
+  margin-top: 2em;
+  font-size: small;
+  text-align: right;
+}
+
+@media screen {
+  .codeblock {
+    padding: 0.5em;
+    background: #222;
+    color: #ddd;
+  }
+}
+
+@media print {
+  .codeblock {
+    margin-left: 2em;
+  }
+}
+
+table
+{
+	border-collapse:collapse;
+	margin:20px 0 0;
+	padding:0;
+}
+
+table tr
+{
+	border-top:1px solid #ccc;
+	background-color:#fff;
+	margin:0;
+	padding:0;
+}
+
+table tr:nth-child(2n)
+{
+	background-color:#f8f8f8;
+}
+table tr th[align="center"], table tr td[align="center"] {
+	text-align:center;
+}
+table tr th, table tr td
+{
+	border:1px solid #ccc;
+	text-align:left;
+	margin:0;
+	padding:6px 13px;
+}

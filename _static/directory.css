@@ -1,0 +1,42 @@
+body {
+  margin: 2em 5em 2em 5em;
+}
+a {
+    text-decoration: none;
+}
+.directoryHeading {
+  font-size: 2em;
+  font-family: sans-serif;
+}
+
+@media all and (min-width: 600px) {
+  .directoryTable {
+    display: table;
+  }
+  .directoryTable {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+  }
+  .directoryHeader {
+    display: table-row;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .directoryRow {
+    display: table-row;
+    font-size: 1.2em;
+  }
+  .directoryRow:hover {
+      background: #f0f0f0;
+  }
+  .directoryCell {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #eee;
+    display: table-cell;
+    padding:0.5em;
+    vertical-align: middle;
+  }
+}

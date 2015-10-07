@@ -1,0 +1,553 @@
+{
+  "head": {
+    "title": "R Reference Card",
+    "description": "Free software for statistical computing",
+    "aliases": [
+      "r"
+    ],
+    "credits": [
+      {
+        "name": "Tom Short",
+        "email": "t.short@ieee.org"
+      },
+      {
+        "name": "Matt Baggott",
+        "email": "matt@baggott.net"
+      }
+    ],
+    "highlight": "r",
+    "multiColumn": true
+  },
+  "sections": [
+    {
+      "title": "Getting help and info",
+      "content": [
+        {
+          "title": "````help(topic)```` or ````?topic````",
+          "description": "",
+          "body": "Documentation on ````topic````. Special characters need to be quoted, e.g. ````?'&&'````."
+        },
+        {
+          "title": "````help.search(\"topic\")```` or ````??topic````",
+          "description": "",
+          "body": "Search the help system"
+        },
+        {
+          "title": "````apropos(\"topic\")````",
+          "description": "",
+          "body": "The names of all objects in the search list matching the regular expression ````\"topic\"````"
+        },
+        {
+          "title": "````help.start()````",
+          "description": "",
+          "body": "Start the HTML version of help "
+        },
+        {
+          "title": "````summary(x)````",
+          "description": "",
+          "body": "Generic function to give a \"summary\" of ````x````, often a statistical one."
+        },
+        {
+          "title": "````str(x)````",
+          "description": "",
+          "body": "Display the internal structure of an R object"
+        },
+        {
+          "title": "````ls()````",
+          "description": "",
+          "body": "Show objects in the search path; specify ````pat=\"pat\"```` to search on a pattern"
+        },
+        {
+          "title": "````ls.str()````",
+          "description": "",
+          "body": "````str```` for each variable in the search path"
+        },
+        {
+          "title": "````dir()````",
+          "description": "",
+          "body": "Show files in the current directory"
+        },
+        {
+          "title": "````methods(x)````",
+          "description": "",
+          "body": "Show S3 methods of ````x```` "
+        },
+        {
+          "title": "````methods(class=class(x))````",
+          "description": "",
+          "body": "List all the methods to handle objects of class ````x```` "
+        },
+        {
+          "title": "````findFn()````",
+          "description": "",
+          "body": "Search a database of help packages for functions and return a ````data.frame```` (requires *sos* package)"
+        }
+      ]
+    },
+    {
+      "title": "Other R references",
+      "content": [
+        {
+          "title": "CRAN task views",
+          "description": "",
+          "body": "[Task views](http://cran.r-project.org/web/views) provide summaries of R resources for a given domain. Groups of packages can be installed quickly via the *ctv* package."
+        },
+        {
+          "title": "Other guides",
+          "description": "",
+          "body": "* [FAQ](http://cran.r-project.org/doc/FAQ/R-FAQ.html)\n* [R Functions for Regression Analysis](http://cran.r-project.org/doc/contrib/Ricci-refcard-regression.pdf)\n* [R Functions for Time Series Analysis, by Vito Ricci](http://cran.r-project.org/doc/contrib/Ricci-refcard-ts.pdf)\n* [R Reference Card for Data Mining,  by Yanchang Zhao](https://cran.r-project.org/doc/contrib/YanchangZhao-refcard-data-mining.pdf)\n* [R Reference Card by Jonathan Baron](http://cran.r-project.org/doc/contrib/refcard.pdf)"
+        }
+      ]
+    },
+    {
+      "title": "Operators",
+      "content": [
+        {
+          "title": "`<‐` ",
+          "description": "",
+          "body": "Left assignment, binary"
+        },
+        {
+          "title": "`->`",
+          "description": "",
+          "body": "Right assignment, binary"
+        },
+        {
+          "title": "`=`",
+          "description": "",
+          "body": "Left assignment, but not recommended"
+        },
+        {
+          "title": "`<<‐`",
+          "description": "",
+          "body": "Left assignment in outer lexical scope; not\nfor beginners "
+        },
+        {
+          "title": "`$`",
+          "description": "",
+          "body": "List subset, binary"
+        },
+        {
+          "title": "`-`",
+          "description": "",
+          "body": "Minus, can be unary or binary "
+        },
+        {
+          "title": "`+`",
+          "description": "",
+          "body": "Plus, can be unary or binary"
+        },
+        {
+          "title": "`~`",
+          "description": "",
+          "body": "Tilde, used for model formulae "
+        },
+        {
+          "title": "`:`",
+          "description": "",
+          "body": "Sequence, binary (in model formulae: interaction) "
+        },
+        {
+          "title": "`::`",
+          "description": "",
+          "body": "Refer to function in a package, i.e, pkg::function; usually not needed "
+        },
+        {
+          "title": "`*`",
+          "description": "",
+          "body": "Multiplication, binary"
+        },
+        {
+          "title": "`/`",
+          "description": "",
+          "body": "Division, binary"
+        },
+        {
+          "title": "`^`",
+          "description": "",
+          "body": "Exponentiation, binary"
+        },
+        {
+          "title": "`%x%`",
+          "description": "",
+          "body": "Special binary operators, `x` can be\nreplaced by any valid name "
+        },
+        {
+          "title": "`%%`",
+          "description": "",
+          "body": "Modulus, binary"
+        },
+        {
+          "title": "`%/%` ",
+          "description": "",
+          "body": "Integer divide, binary"
+        },
+        {
+          "title": "`%*%`",
+          "description": "",
+          "body": "Matrix product, binary"
+        },
+        {
+          "title": "`%o%`",
+          "description": "",
+          "body": "Outer product, binary "
+        },
+        {
+          "title": "`%x%`",
+          "description": "",
+          "body": "Kronecker product, binary "
+        },
+        {
+          "title": "`%in%` ",
+          "description": "",
+          "body": "Matching operator, binary (in model\nformulae: nesting) "
+        },
+        {
+          "title": "`! x`",
+          "description": "",
+          "body": "logical negation, NOT x "
+        },
+        {
+          "title": "`x & y`",
+          "description": "",
+          "body": "elementwise logical AND"
+        },
+        {
+          "title": "`x && y`",
+          "description": "",
+          "body": "vector logical AND"
+        },
+        {
+          "title": "`x | y`",
+          "description": "",
+          "body": "elementwise logical OR "
+        },
+        {
+          "title": "`x || y`",
+          "description": "",
+          "body": "vector logical OR"
+        },
+        {
+          "title": "`xor(x, y)`",
+          "description": "",
+          "body": "elementwise exclusive OR"
+        },
+        {
+          "title": "`<`",
+          "description": "",
+          "body": "Less than, binary"
+        },
+        {
+          "title": "`>`",
+          "description": "",
+          "body": "Greater than, binary"
+        },
+        {
+          "title": "`==`",
+          "description": "",
+          "body": "Equal to, binary "
+        },
+        {
+          "title": "`>=`",
+          "description": "",
+          "body": "Greater than or equal to, binary "
+        },
+        {
+          "title": "`<=`",
+          "description": "",
+          "body": "Less than or equal to, binary"
+        }
+      ]
+    },
+    {
+      "title": "Input and output",
+      "content": [
+        {
+          "title": "`load()`",
+          "description": "",
+          "body": "Loads the dataset written with `save`"
+        },
+        {
+          "title": "`data(x)`",
+          "description": "",
+          "body": "Loads specified datasets; if no arg is given it\nlists all available data sets "
+        },
+        {
+          "title": "`read.table(file)`, `read.csv(file)`, `read.delim(“file”)`, `read.fwf(“file”)`",
+          "description": "",
+          "body": "Reads a file using defaults sensible for a\ntable/csv/delimited/fixed-width file and creates a\ndata frame from it. "
+        },
+        {
+          "title": "`library(x)`",
+          "description": "",
+          "body": "Loads add-on packages"
+        },
+        {
+          "title": "`save(file,...)`",
+          "description": "",
+          "body": "Saves the specified objects `(...)` in the XDR platform-independent\nbinary format"
+        },
+        {
+          "title": "`save.image(file)`",
+          "description": "",
+          "body": "Saves all objects"
+        },
+        {
+          "title": "`cat(..., file=\"\", sep=\" \")`",
+          "description": "",
+          "body": "Prints the arguments after coercing to character; `sep` is the character separator between arguments"
+        },
+        {
+          "title": "`print(a, ...)`",
+          "description": "",
+          "body": "Prints its arguments; generic, meaning it can have different methods for different objects"
+        },
+        {
+          "title": "`format(x,...)`",
+          "description": "",
+          "body": "Formats an R object for pretty printing"
+        },
+        {
+          "title": "`write.table(x,file)`, `write.csv(x,file)`",
+          "description": "",
+          "body": "Saves `x` after converting to a data frame "
+        },
+        {
+          "title": "`sink(file)`",
+          "description": "",
+          "body": "Output to `file`, until `sink()`"
+        },
+        {
+          "title": "`txtStart` and `txtStop`",
+          "description": "",
+          "body": "Saves a transcript of commands and/or output to a text file (*TeachingDemos*) "
+        },
+        {
+          "title": "`download.file(url)`",
+          "description": "",
+          "body": "Downloads `url` from the net"
+        },
+        {
+          "title": "`url.show(url)`",
+          "description": "",
+          "body": "Remote input"
+        },
+        {
+          "description": "",
+          "title": "Database I/O",
+          "body": "Useful packages: *DBI* interface between R and\nrelational DBMS; *RJDBC* access to databases\nthrough the JDBC interface; *RMySQL* interface to\nMySQL database; *RODBC* ODBC database access;\n*ROracle* Oracle database interface driver; *RpgSQL*\ninterface to PostgreSQL database; *RSQLite* SQLite\ninterface for R"
+        },
+        {
+          "title": "Clipboard I/O",
+          "description": "",
+          "body": "File connections of functions can also be used to read\nand write to the clipboard instead of a file.\n\nMac OS:\n`x <‐ read.delim(pipe(“pbpaste”))`\n\nWindows:\n`x <‐ read.delim(ʺclipboardʺ)`\n\nSee also: `read.clipboard` (*psych*) "
+        }
+      ]
+    },
+    {
+      "title": "Packages",
+      "content": [
+        {
+          "title": "`install.packages(“pkgs”, lib)`",
+          "description": "",
+          "body": "Download and install pkgs from repository (lib) or other external source "
+        },
+        {
+          "title": "`update.packages`",
+          "description": "",
+          "body": "Checks for new versions and offers to install"
+        },
+        {
+          "title": "`library(pkg)`",
+          "description": "",
+          "body": "Loads `pkg`, if `pkg` is omitted it lists packages "
+        },
+        {
+          "title": "`detach(ʺpackage:pkgʺ)`",
+          "description": "",
+          "body": "Removes pkg from memory"
+        }
+      ]
+    },
+    {
+      "title": "Indexing vectors",
+      "content": [
+        {
+          "title": "`x[n]`",
+          "description": "",
+          "body": "`n`th element"
+        },
+        {
+          "title": "`x[‐n]` ",
+          "description": "",
+          "body": "all but the `n`th element "
+        },
+        {
+          "title": "`x[1:n]`",
+          "description": "",
+          "body": "first `n` elements"
+        },
+        {
+          "title": "`x[‐(1:n)]` ",
+          "description": "",
+          "body": "Elements from `n+1` to end "
+        },
+        {
+          "title": "`x[c(1,4,2)]` ",
+          "description": "",
+          "body": "specific elements "
+        },
+        {
+          "title": "`x[ʺnameʺ]`",
+          "description": "",
+          "body": "element named `\"name\"`"
+        },
+        {
+          "title": "`x[x > 3]`",
+          "description": "",
+          "body": "all elements greater than 3 "
+        },
+        {
+          "title": "`x[x > 3 & x < 5]` ",
+          "description": "",
+          "body": "all elements between 3 and 5 "
+        },
+        {
+          "title": "`x[x %in% c(ʺaʺ,ʺifʺ)]`",
+          "description": "",
+          "body": "elements in the given set "
+        }
+      ]
+    },
+    {
+      "title": "Indexing lists",
+      "content": [
+        {
+          "title": "`x[n]`",
+          "description": "",
+          "body": "list with elements `n `"
+        },
+        {
+          "title": "`x[[n]]` ",
+          "description": "",
+          "body": "`n`th element of the list "
+        },
+        {
+          "title": "`x[[ʺnameʺ]]`",
+          "description": "",
+          "body": "element named \"name\""
+        },
+        {
+          "title": "`x$name`",
+          "description": "",
+          "body": "as above (w. partial matching) "
+        }
+      ]
+    },
+    {
+      "title": "Indexing matrices",
+      "content": [
+        {
+          "title": "`x[i,j]`",
+          "description": "",
+          "body": "element at row `i`, column `j` "
+        },
+        {
+          "title": "`x[i,]` ",
+          "description": "",
+          "body": "row `i` "
+        },
+        {
+          "title": "`x[,j]` ",
+          "description": "",
+          "body": "column `j` "
+        },
+        {
+          "title": "`x[,c(1,3)]`",
+          "description": "",
+          "body": "columns 1 and 3 "
+        },
+        {
+          "title": "`x[ʺnameʺ,]` ",
+          "description": "",
+          "body": "row named \"name\" "
+        },
+        {
+          "title": "`X[[ʺnameʺ]] `",
+          "description": "for data frames",
+          "body": "column named \"name\" "
+        },
+        {
+          "title": "`x$name`",
+          "description": "for data frames",
+          "body": "as above (w. partial matching) "
+        }
+      ]
+    },
+    {
+      "title": "Data creation",
+      "content": [
+        {
+          "title": "`c(...)`",
+          "description": "",
+          "body": "Generic function to combine arguments with the\ndefault forming a vector; with `recursive=TRUE`\ndescends through lists combining all elements\ninto one vector "
+        },
+        {
+          "title": "`from:to`",
+          "description": "",
+          "body": "Generates a sequence; “:” has operator\npriority; 1:4 + 1 is “2,3,4,5” "
+        },
+        {
+          "title": "`seq(from,to)`",
+          "description": "",
+          "body": "Generates a sequence. `by=` specifies\nincrement; `length=` specifies desired length "
+        },
+        {
+          "title": "`seq(along=x)`",
+          "description": "",
+          "body": "Generates 1, 2, ..., `length(along)`;\nuseful in for loops "
+        },
+        {
+          "title": "`rep(x,times)`",
+          "description": "",
+          "body": "Replicate `x` times; use each to repeat\n“each” element of x each times; `rep(c(1,2,3),2)` is\n1 2 3 1 2 3; `rep(c(1,2,3),each=2)` is 1 1 2 2 3 3 "
+        },
+        {
+          "title": "`data.frame(...)`",
+          "description": "",
+          "body": "Creates a data frame of the named or\nunnamed arguments, e.g.:  `data.frame(v=1:4, ch=\nc(\"a\",\"B\",\"c\",\"d\"), n=10);`\n\nShorter vectors are recycled to the length of the longest"
+        },
+        {
+          "title": "`list(...)`",
+          "description": "",
+          "body": "Creates a list of the named or unnamed\narguments, e.g.: `list(a=c(1,2),b=\"hi\", c=3);`"
+        },
+        {
+          "title": "`array(x,dim=)`",
+          "description": "",
+          "body": "Array with data `x`; specify\ndimensions like `dim=c(3,4,2);` elements of `x`\nrecycle if `x` is not long enough"
+        },
+        {
+          "title": "`matrix(x,nrow,ncol)`",
+          "description": "",
+          "body": "Matrix; elements of `x` recycle\n\n`factor(x,levels)` encodes a vector `x` as a factor"
+        },
+        {
+          "title": "`gl(n, k, length=n*k, labels=1:n)`",
+          "description": "",
+          "body": "Generates levels (factors) by specifying the pattern of their levels;\n`k` is the number of levels, and `n` is the number of\nreplications"
+        },
+        {
+          "title": "`expand.grid()`",
+          "description": "",
+          "body": "A data frame from all combinations of\nthe supplied vectors or factors "
+        },
+        {
+          "title": "Data conversion",
+          "description": "",
+          "body": "`as.array(x)`, `as.character(x)`, `as.data.frame(x)`,\n`as.factor(x)`, `as.logical(x)`, `as.numeric(x)`,\nconvert type; for a complete list, use\n`methods(as)`"
+        }
+      ]
+    }
+  ]
+}

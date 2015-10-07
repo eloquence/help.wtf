@@ -1,0 +1,92 @@
+{
+  "head": {
+    "title": "ECMAScript 6 Cheatsheet",
+    "description": "Everything about the latest version of the ECMAScript (JavaScript) standard",
+    "aliases": [
+      "es6",
+      "es2015",
+      "code/es6",
+      "code/es2015",
+      "newjs"
+    ],
+    "credits": [
+      {
+        "name": "Erik Moeller",
+        "email": "eloquence@gmail.com",
+        "url": "https://twitter.com/xirzon"
+      }
+    ],
+    "highlight": "javascript"
+  },
+  "sections": [
+    {
+      "title": "Fundamentals",
+      "content": [
+        {
+          "title": "Get ES6",
+          "body": "- It's the latest version of JavaScript, also known as ES2015.\n- The [spec](http://www.ecma-international.org/ecma-262/6.0/) is finalized.\n- It's incrementally making its way into browsers.\n- [io.js](https://iojs.org/) uses the latest version of V8 (Chrome's JavaScript engine).\n- [node.js](http://nodejs.org/) is a little behind.\n- [babel.js](https://babeljs.io/) can be used for older browsers, and includes a babel-node environment w/ REPL.\n\nAll examples herein have been tested in babel-node and *may not work* in incomplete ES6 implementations."
+        },
+        {
+          "title": "Block scope",
+          "description": "Reduce accidental errors",
+          "body": "````\n// \"let\": define variables in the scope of a block (new in ES6)\n// \"var\": define variables in the scope of the entire function.\nconsole.log(a); // \"undefined\": a is declared below, but is function-scoped!\n{\n  var a = 'Hello';\n  let b = 'world';\n  console.log(`${a} ${b}`); // \"Hello world\", see template strings\n}\nconsole.log(`${a} ${b}`); // will throw: b is defined in the scope of the block\n````"
+        },
+        {
+          "title": "Arrow functions",
+          "description": "Putting the fun in functions",
+          "body": "````\n// In the simplest form, '() => expr' is equivalent to\n// function() { return expr; }, so using ES6's Array.from\n// we can quickly generate an array with random numbers.\nlet randArr = Array.from({length: 100}, () => Math.random()*1000);\n\n// The lefthand side of the arrow function enumerates the parameters. If it's\n// just one, we don't need parentheses around it.\nrandArr = randArr.map(v => Math.floor(v));\n\n// With more parameters, we _do_ need the parentheses. On the righthand side,\n// we can have any return expression (object literals need to be in regular\n// parentheses to distinguish them from statement blocks).\nlet evenKeys = randArr.filter((v, k) => k % 2 === 0);\n\n// We can also put statements on the righthand side -- in which case we\n// have to write our own return statement, and create a { block }.\n// Let's use ES6's some() to see if we have numbers in the range 30...50.\nconsole.log(evenKeys.some(v => {\n  if (typeof v !== 'number') throw new TypeError('Give me numbers.');\n  return v >= 30 && v <= 50;\n}));\n\n// One neat thing: 'this' is set to the function's enclosing context --\n// no need to bind() arrow functions to 'this' or use hacks like 'self=this'!\nfunction SlowPrinter(arr, timer = 50) { // ES6 default assignment\n  this.arr = arr.slice(); // make a copy\n  this.timer = timer;\n  this.busy = false;\n  this.print = function() {\n    if (this.busy) return false;\n    this.busy = true;\n    // With a regular function, this would now be undefined in strict mode\n    setTimeout(() => {\n      this.busy = false;\n      console.log(this.arr.shift());\n      if (this.arr.length) this.print();\n    }, this.timer);\n  };\n}\nnew SlowPrinter(evenKeys, 25).print();\n````\n"
+        },
+        {
+          "title": "Template strings",
+          "description": "Interpolation, multiline strings, quick transformations",
+          "body": "`````\n// Backtics enclose a template string; ${} interpolates arbitrary expressions\nlet num = 99; // see block scope\nconsole.log(`${num} bottles of beer on the wall, ${num} bottles of beer\nTake one down and pass it around, ${--num} bottles of beer!`);\n\n// Tagged form: Attach a function that processes string fragments and evaluated\n// expressions\nfunction celsius(strings, ...values) {\n  let rv = '';\n  strings.forEach((string, index) => { // See arrow functions\n    rv += string;\n    if (typeof values[index] !== 'undefined')\n      rv += Math.round((values[index] - 32) / 1.8);\n  });\n  return rv;\n}\n\n// Converts all the interpolated numbers to the proper unit\nconsole.log(celsius `Today temperatures ranged from ${60} to ${65} degrees.`);\n`````"
+        },
+        {
+          "title": "Classes",
+          "description": "Syntactic sugar for your prototype chains",
+          "body": "````\nclass Monster {\n  constructor() {\n    this.maxDamage = 5;\n    this.icon = '%';\n  }\n  bite(victim) { // same as Monster.prototype.bite\n    console.log(this.icon + ' bites!');\n    this._dmg(victim);\n  }\n  _dmg(victim, maxDamage = this.maxDamage) { // ES6 feature: default value\n    let dmg = Math.floor(Math.random() * maxDamage + 1);\n    victim.hp -= dmg;\n    console.log('You suffer ' + dmg + ' points of damage.');\n  }\n}\n\n// Using extends here has the same effect as:\n// Rat.prototype = Object.create(Monster.prototype);\n// Rat.prototype.constructor = Rat;\nclass Rat extends Monster {\n  constructor() {\n    super(); // same as Monster.call(this)\n    this.icon = 'r';\n  }\n  breathe(victim) {\n    if (victim.distance < 2) {\n      console.log(this.icon + ' is using its proximity breathing attack!');\n      this._dmg(victim, 3);\n    }\n  }\n}\n\nlet rat = new Rat();\nlet hero = {\n  hp: 20,\n  distance: 1\n};\nrat.bite(hero);\nrat.breathe(hero);\n````\n"
+        },
+        {
+          "title": "Promises",
+          "description": "Useful for asynchronous programming",
+          "body": "````\n// fetch() is a WHATWG spec supported by some modern browsers as an alternative\n// to XMLHttpRequest. Notably, it returns Promises both for the initial response\n// header, and for the body stream, so we can chain up an execution pipeline\n// using then().\nfetch('http://localhost/', {\n    mode: 'same-origin'\n  }).then(function(response) {\n    console.log('Status', response.status);\n    return response.text();\n  })\n  .then(function(text) { // We got the header before the body streams through\n    console.log('Body', text);\n  })\n  .catch(function(e) { // Catch all the things!\n    console.warn('There was a problem:', e.message);\n  });\n````"
+        },
+        {
+          "title": "Making Promises",
+          "description": "Wrap existing callback-based functions to return Promise objects",
+          "body": "````\n// Let's make a \"setTimeout\" that works with promises instead of vanilla\n// callbacks. Note the function we pass to the constructor is executed\n// immediately once we create a new Promise.\nfunction wait(time) {\n  // See arrow functions\n  return new Promise((resolve, reject) => {\n    setTimeout(resolve, time);\n  });\n}\n\n// This will start an actual timer, but do nothing upon its completion.\nwait(3000);\n\n// So let's build some functions that allow us to make an execution chain.\nfunction causeProblems() {\n  throw new Error('You wanted problems? You got em!');\n}\n\nfunction apologize() {\n  console.log('Sorry about the mess.');\n}\n\nfunction ignoreProblems(error) {\n  console.log('Ignored problems successfully:', error);\n}\n\n// apologize() will be called after a second.\nwait(1000).then(apologize);\n\n// apologize() will _not_ be called, due to the error.\nwait(2000).then(causeProblems).then(apologize, ignoreProblems);\n\n// Since we know this, we can use catch(), which does not take a resolve handler\nwait(3000).then(causeProblems).catch(ignoreProblems);\n````"
+        },
+        {
+          "title": "Generators",
+          "description": "Pause and remote-control your functions",
+          "body": "````\n// A generator function will return an object that implements the iteration\n// protocol, i.e., it has a next() method that returns\n// { value: < some value>, done: <true or false> }\nfunction* incRand(max) { // Asterisk defines this as a generator function\n  while (true) {\n    // Pause execution after the yield, resume when next(<something>) is called\n    // and assign <something> to x\n    let x = yield Math.floor(Math.random() * max + 1);\n    max += x;\n  }\n}\nvar rng = incRand(2); // Now we have a generator object to work with\nconsole.log(rng.next()); // { value: <between 1 and 2>, done: false }\nconsole.log(rng.next(3)); // as above, but between 1 and 5\nconsole.log(rng.next()); // as above, but NaN since 5 + undefined results in NaN\nconsole.log(rng.next(20)); // Oops, looks like we broke it! NaN again.\nrng.throw(new Error('Unrecoverable generator state.')); // Will be thrown from yield\n````"
+        },
+        {
+          "title": "Object literal shorthand",
+          "description": "Don't repeat yourself",
+          "body": "````\nvar firstName = 'Grover';\nvar lastName = 'Cleveland';\nvar person = { firstName, lastName }; // Same as firstName: firstName, lastName: lastName\nconsole.log(person.lastName); // 'Cleveland'\n````"
+        }
+      ]
+    },
+    {
+      "title": "Advanced",
+      "content": [
+        {
+          "title": "Destructuring",
+          "description": "Quickly extract values from objects and arrays",
+          "body": "````\n// Using destructuring we can quickly assign arbitrary subsets of object\n// properties to eponymous variables\nlet animal = { type: 'dog', sound: 'woof', paws: 4 };\nlet {name, sound, paws} = animal;\nconsole.log(sound, name); /// \"woof undefined\"\n\n// This also works for function parameters (here used w/ an arrow function\n// returning a template string)\nvar fmt = ({id, name}) => `${id}: ${name}`;\nconsole.log(fmt({ id: 1, name: 'joe'})); // \"1: joe\"\n\n// Arrays work pretty much the same, but the variable name is irrelevant.\n// We don't have to destructure the whole thing, but here we also use the\n// ...spread operator to capture the rest of the array.\nlet [n1, n2, n3, n4, ...r] = [100, 'three', 34, {number: 23}, 694, 'eighteen'];\nconsole.log(n1, n2, n3, n4); // \"100 'three' 34 { number: 23 }\"\nconsole.log(r); // \"[ 694, 'eighteen' ]\"\n````"
+        },
+        {
+          "title": "Symbols as keys",
+          "description": "Call ````Symbol()```` to get a unique identifier",
+          "body": "````\n// Symbols are guaranteed to be unique, and as such a good alternative to\n// string constants. Here we use them for a super-basic spam classifier\n// anyone can add to without risking conflict with existing classifiers.\n// Descriptions are optional and don't factor into uniqueness comparisons.\nconst ALL_CAPS_NAME = Symbol('name in all caps');\nconst DOMAIN_DIGITS = Symbol('lots of digits in domain name');\nvar senderClassifiers = [\n  (header) => { // See arrow functions\n    var r = /^From: (.*) </.exec(header) || [];\n    return r[1] && r[1] === r[1].toUpperCase() ? [ALL_CAPS_NAME, 0.5] : null;\n  },\n  (header) => {\n    var r = /^From:.*@(.*)>/.exec(header) || [];\n    return r[1] && r[1].match(/\\d\\d\\d/) ? [DOMAIN_DIGITS, 0.2] : null;\n  }\n];\n\nfunction scoreHeaders(arr) {\n  return arr.map(header => {\n    let score = 0;\n    senderClassifiers.forEach((cl) => {\n      let rv = cl(header);\n      if (rv && rv[1]) score += rv[1];\n    });\n    return {\n      score, header // See shorthand assignment\n    };\n  });\n}\nconsole.dir(scoreHeaders([\n    'From: SATAN <satan@ilove666.com>',\n    'From: POTUS <president@whitehouse.gov>',\n    'From: Your Mom <mom@home>'\n]));\n````\n"
+        },
+        {
+          "title": "Using well-known Symbols",
+          "description": "````Symbol.iterator```` can be used to make your own iterators",
+          "body": "````\n// By following the iteration protocol, we can make any object iterable\n// via for .. of loops, the ...spread operator, and destructuring. Generators\n// give us objects that follow this protocol. Let's implement it ourselves\n// to make an array popper that also timestamps objects.\nfunction tspop(arr) {\n  function next() {\n    let value = arr.pop();\n    if (typeof value !== 'undefined') {\n      if (typeof value === 'object')\n        value.ts = Date.now();\n      // This format is prescribed by the protocol.\n      return { value, done: false }; // ES6 shorthand property\n    }\n    else\n      // We can omit value when we're done.\n      return { done: true };\n  }\n  // The Symbol.iterator is a \"well-known Symbol\" in ES6 which we can use to\n  // give any object a function that returns objects that implement the\n  // iteration protocol, i.e. a next() function that returns { value, done }.\n  this[Symbol.iterator] = () => ({ next }); // ES6 shorthand property\n}\nvar db = [{ name: 'jm', age: 36}, {name: 'ck', age: 15}, {name: 'ob', age: 85}];\nvar p = new tspop(db);\nfor (var l of p) // Whee! Thank you, iteration protocol!\n  console.log(l);\n````\n"
+        }
+      ]
+    }
+  ]
+}

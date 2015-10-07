@@ -1,0 +1,74 @@
+{
+  "head": {
+    "title": "Markdown Cheatsheet",
+    "description": "Foundations and GitHub extensions on one page",
+    "aliases": [
+      "md",
+      "markdown"
+    ],
+    "credits": [
+      {
+        "name": "Erik Moeller",
+        "email": "eloquence@gmail.com"
+      }
+    ],
+    "highlight": "markdown"
+  },
+  "sections": [
+    {
+      "title": "Basics",
+      "content": [
+        {
+          "title": "What is it",
+          "description": "",
+          "body": "* Format text without using \"what you see is what you get\" editing tools\n* Use simple symbols like asterisks, dashes, etc. for formatting\n* A program turns it into its final form, but it's intended to be readable and intuitive\n* Still, some syntax (e.g., links, images) takes some getting used to!\n* Plus, there are a number of different flavors:\n  * [The original markdown](https://daringfireball.net/projects/markdown/syntax)\n  * [GitHub's flavor](https://help.github.com/articles/github-flavored-markdown/)\n * This page describes basic markdown + GitHub's extensions, but calls out the latter"
+        },
+        {
+          "title": "Linebreaks",
+          "description": "",
+          "body": "Write text normally. Single linebreaks are ignored. Hence, if you write:\n\n    O to realize space!\n    The plenteousness of all, that there are no bounds,\n    To emerge and be of the sky, of the sun and moon and flying\n      clouds, as one with them.\n\nIt becomes:\n\nO to realize space!\nThe plenteousness of all, that there are no bounds,\nTo emerge and be of the sky, of the sun and moon and flying\n  clouds, as one with them.\n\nIn situations like this, when you want to force a linebreak, end the line with two spaces (`  `). \n\n    O to realize space!  \n    The plenteousness of all, that there are no bounds,  \n    To emerge and be of the sky, of the sun and moon and flying  \n    &nbsp;&nbsp;clouds, as one with them.  \n\nHere we are also using HTML's \"non-breaking space\" (`&nbsp;`) to force indentation of hte last line. This becomes:\n\nO to realize space!  \nThe plenteousness of all, that there are no bounds,  \nTo emerge and be of the sky, of the sun and moon and flying  \n&nbsp;&nbsp;clouds, as one with them.  \n"
+        },
+        {
+          "title": "Formatting",
+          "description": "",
+          "body": "*Emphasize something*: `*single stars*`\n\n**Really emphasize something:** `**double stars**`\n\n~~Didn't mean it~~: `~~double tildes~~` (GitHub flavor)\n\nYou can also use `_underscores_` instead of stars.\n\nQuote someone: \n\n    > The crucial operating premise of the Free Software Movement as a \n    > revolutionary politic is: proof of concept plus running code. \n    * Eben Moglen\n\nbecomes:\n\n> The crucial operating premise of the Free Software Movement as a \n> revolutionary politic is: proof of concept plus running code. \n* Eben Moglen"
+        },
+        {
+          "title": "Headlines",
+          "description": "",
+          "body": "Use `#` for headlines, number of `#` indicates header depth, e.g. \n\n    # First level\n    ## Second level\n    ### Third level\n    #### Fourth level\n\nbecomes:\n\n# First level\n## Second level\n### Third level\n#### Fourth level"
+        },
+        {
+          "title": "Lists",
+          "description": "",
+          "body": "Use dashes, asterisks or numbers to make list items, indent with two spaces:\n\n    * Take over the world\n    * ???\n      - We need a plan\n        1. Make a plan\n        2. **Execute it**\n\nbecomes:\n\n* Take over the world\n* ???\n  - We need a plan\n    1. Make a plan\n    2. **Execute it**\n\nFor numbered lists, you don't need to write the numbers yourself -- in fact, your numbers are ignored:\n\n    1. First item\n    24. Second item\n    1. Third item\n\nbecomes:\n\n1. First item\n24. Second item\n1. Third item"
+        },
+        {
+          "title": "Links and Media",
+          "description": "",
+          "body": "Links and media intentionally use very similar syntax. \n\nLinks: `[some link text](some URL)`\n \nMedia: `![some alt text](some URL)`\n\nThe \"alt(ernative) text\" is displayed/read out loud for users who can't view the media file, and should be descriptive of the media file's contents.\n\nExamples:\n\n    [Defective By Design](http://defectivebydesigh.org)\n\n    ![\"Authors Against DRM\" logo](https://static.fsf.org/dbd/AADl.png)\n\nbecomes:\n\n[Defective By Design](http://defectivebydesigh.org)\n\n![\"Authors Against DRM\" logo](https://static.fsf.org/dbd/AADl.png)\n\nWhen you just want to use plain URLs and email addresses, you can surround them with `<angle brackets>`. In GitHub style, you don't need the angle brackets for URLs -- in vanilla markdown, you do.\n\n    My name: Grover Cleveland  \n    My email address: <president@whitehouse.gov>  \n    My homepage: https://www.whitehouse.gov/\n\nbecomes: \n\nMy name: Grover Cleveland  \nMy email address: <president@whitehouse.gov>  \nMy homepage: https://www.whitehouse.gov/  \n"
+        }
+      ]
+    },
+    {
+      "title": "Advanced",
+      "content": [
+        {
+          "title": "Code",
+          "description": "",
+          "body": "A single backtic marks inline code segments:\n\n    This is some text with `<code>` in it.\n\nbecomes: \n\nThis is some text with `<code>` in it.\n\nLines indented with four spaces are interpreted as code blocks. In GitHub style, you can achieve the same by using four backtics before and after the code block:\n\n    ````\n    var l = 0.1 + 0.2;\n    console.log('Mind the floating point: '+l);\n    ````\n\nbecomes:\n\n````javascript\nvar l = 0.1 + 0.2;\nconsole.log('Mind the floating point: '+l);\n````\n\nIn GitHub style, you can specify the programming language (for syntax highlighting) after the backtics, like so:\n\n    ````rust\n    // Import (via `use`) the `fmt` module to make it available.\n    use std::fmt;\n    ````\n\nbecomes:\n\n````rust\n// Import (via `use`) the `fmt` module to make it available.\nuse std::fmt;\n````\n"
+        },
+        {
+          "title": "Link re-use and link titles",
+          "description": "",
+          "body": "You can use arbitrary identifiers within text to label and re-use links, like so:\n\n    In 2000, *Salon* [described][cite1] [NetHack][] as \"one of the finest \n    gaming experiences the computing world has to offer.\" \n\n    [1]: http://archive.salon.com/tech/feature/2000/01/27/nethack/\n    [NetHack]: http://www.nethack.org/\n\nThis becomes:\n\nIn 2000, *Salon* [described][cite1] [NetHack][] as \"one of the finest \ngaming experiences the computing world has to offer.\" \n\n[cite1]: http://archive.salon.com/tech/feature/2000/01/27/nethack/\n[NetHack]: http://www.nethack.org/\n\nSo, source readers will see a nicely enumerated list, and if you keep referring to the same site, you only have to update it in one place. Note how in the second link, the link text and link label are identical, so we can omit the identifier parameter.\n\nMarkdown also supports generating the \"title\" attribute for links, which is displayed by most browsers as a tooltip you see when hovering over the link. Just type it after the URL, separated by a space, enclosed in quotation marks:\n\n    [This link is mysterious](https://debian.org/ \"The universal operating system\"). \n    Hover over it to get a hint.\n\nbecomes:\n\n[This link is mysterious](https://debian.org/ \"The universal operating system\"). \nHover over it to get a hint."
+        },
+        {
+          "title": "Tables",
+          "description": "GitHub flavor only",
+          "body": "Use dashes and pipes to construct simple tables (remember the pipe has to go all the way through for each column!):\n\n    Year | Potato produce (thousands of tons) *estimate*\n    -----|----------------------------------------------\n    1845 | 11000\n    1847 | 2000\n    1849 | 4000\n    1851 | 5000\n\nbecomes:\n\nYear | Potato produce (thousands of tons) *estimate*\n-----|----------------------------------------------\n1845 | 11000\n1847 | 2000\n1849 | 4000\n1851 | 5000"
+        }
+      ]
+    }
+  ]
+}

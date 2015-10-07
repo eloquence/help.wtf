@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%- conf.siteName -%> - <%- conf.siteMotto -%></title>
+    <% if(process.env.NODE_ENV === 'production') { %>
+    <style>
+    <%- include('../../_static/lib/normalize.css'); %>
+    <%- include('../../_static/directory.css'); %>
+    </style>
+    <% } else { %>
+    <link rel="stylesheet" type="text/css" href="/_static/lib/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/_static/directory.css">
+    <% } %>
+  </head>
+  <body>
+    Wouldn't it be nice if life had a cheatsheet? This is a place to collect
+    concise help for any given topic.
+    <P>
+    <a href="/_compose">Create your own</a> today, or contribute
+    <a href="http://github.com/eloquence/help.wtf">via GitHub</a>.
+    Here's what we have so far:
+    <% if (sheets) { %>
+      <div class="directoryTable">
+        <div class="directoryHeader">
+          <div class="directoryCell">Title</div>
+          <div class="directoryCell">Description</div>
+          <div class="directoryCell">Author(s)</div>
+        </div>
+      <% for (var sheet in sheets) { %>
+        <div class="directoryRow" onclick="javascript:window.location='<%- makeUrl(sheet, sheets[sheet].head.title) -%>'">
+        <div class="directoryCell"><% if (sheets[sheet].head.title) { %><%- makeLink(sheet, sheets[sheet].head.title) -%><% } %></div>
+        <div class="directoryCell"><% if (sheets[sheet].head.description) { %><%- sheets[sheet].head.description -%><% } %></div>
+        <div class="directoryCell"><% if (sheets[sheet].head.credits) { %>
+          <% for(author of sheets[sheet].head.credits) { %>
+            <%- author.name -%><br>
+          <% } %>
+        <% } %>
+        </div>
+        </div>
+      <% } %>
+      </div>
+    <% } %>
+    <script type="text/javascript">
+    // Done via JS so we don't change the pointer if JS is disabled
+    var elements = document.querySelectorAll('.directoryRow');
+    for (var i=0; i<elements.length;i++) {
+       elements[i].style.cursor = "pointer";
+    }
+    </script>
+  </body>
+</html>

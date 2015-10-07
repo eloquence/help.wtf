@@ -1,0 +1,5 @@
+*~
+.jshintrc
+.imdoneignore
+.imdone
+node_modules/
