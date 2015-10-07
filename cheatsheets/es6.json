@@ -24,12 +24,17 @@
       "content": [
         {
           "title": "Get ES6",
-          "body": "- It's the latest version of JavaScript, also known as ES2015.\n- The [spec](http://www.ecma-international.org/ecma-262/6.0/) is finalized.\n- It's incrementally making its way into browsers.\n- [io.js](https://iojs.org/) uses the latest version of V8 (Chrome's JavaScript engine).\n- [node.js](http://nodejs.org/) is a little behind.\n- [babel.js](https://babeljs.io/) can be used for older browsers, and includes a babel-node environment w/ REPL.\n\nAll examples herein have been tested in babel-node and *may not work* in incomplete ES6 implementations."
+          "body": "- Official name: ECMAScript 2016\n- It's the latest version of JavaScript, also known as ES2015.\n- The [spec](http://www.ecma-international.org/ecma-262/6.0/) is finalized.\n- It's [incrementally](https://kangax.github.io/compat-table/es6/) making its way into browsers.\n- [Node.js](http://nodejs.org/) as of V4 has picked up much of it.\n- [babel.js](https://babeljs.io/) can be used for older browsers, and includes a babel-node environment w/ REPL.\n\nAll examples herein have been tested in babel-node and *may not work* in incomplete ES6 implementations."
+        },
+        {
+          "title": "Free ES6 resources",
+          "description": "",
+          "body": "- [“Understanding ECMAScript 6”](https://leanpub.com/understandinges6/read/) by Nicholas C. Zakas\n- [“Exploring ES6”](http://exploringjs.com/es6/) by Axel Rauschmayer\n- [“JavaScript Allongé, the \"Six\" Edition”](https://leanpub.com/javascriptallongesix/read) by Reg “raganwald” Braithwaite\n- [“You Don't Know JS: ES6 & Beyond”](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/README.md#you-dont-know-js-es6--beyond) by Kyle “getify” Simpson"
         },
         {
           "title": "Block scope",
           "description": "Reduce accidental errors",
-          "body": "````\n// \"let\": define variables in the scope of a block (new in ES6)\n// \"var\": define variables in the scope of the entire function.\nconsole.log(a); // \"undefined\": a is declared below, but is function-scoped!\n{\n  var a = 'Hello';\n  let b = 'world';\n  console.log(`${a} ${b}`); // \"Hello world\", see template strings\n}\nconsole.log(`${a} ${b}`); // will throw: b is defined in the scope of the block\n````"
+          "body": "````\n// \"let\": define variables in the scope of a block (new in ES6)\n// \"var\": define variables in the scope of the entire function.\nconsole.log(a); // \"undefined\": a is declared below, but is function-scoped!\n{\n  var a = 'Hello';\n  let b = 'world';\n  console.log(`${a} ${b}`); // \"Hello world\", see template literals\n}\nconsole.log(`${a} ${b}`); // will throw: b is defined in the scope of the block\n````"
         },
         {
           "title": "Arrow functions",
@@ -37,13 +42,13 @@
           "body": "````\n// In the simplest form, '() => expr' is equivalent to\n// function() { return expr; }, so using ES6's Array.from\n// we can quickly generate an array with random numbers.\nlet randArr = Array.from({length: 100}, () => Math.random()*1000);\n\n// The lefthand side of the arrow function enumerates the parameters. If it's\n// just one, we don't need parentheses around it.\nrandArr = randArr.map(v => Math.floor(v));\n\n// With more parameters, we _do_ need the parentheses. On the righthand side,\n// we can have any return expression (object literals need to be in regular\n// parentheses to distinguish them from statement blocks).\nlet evenKeys = randArr.filter((v, k) => k % 2 === 0);\n\n// We can also put statements on the righthand side -- in which case we\n// have to write our own return statement, and create a { block }.\n// Let's use ES6's some() to see if we have numbers in the range 30...50.\nconsole.log(evenKeys.some(v => {\n  if (typeof v !== 'number') throw new TypeError('Give me numbers.');\n  return v >= 30 && v <= 50;\n}));\n\n// One neat thing: 'this' is set to the function's enclosing context --\n// no need to bind() arrow functions to 'this' or use hacks like 'self=this'!\nfunction SlowPrinter(arr, timer = 50) { // ES6 default assignment\n  this.arr = arr.slice(); // make a copy\n  this.timer = timer;\n  this.busy = false;\n  this.print = function() {\n    if (this.busy) return false;\n    this.busy = true;\n    // With a regular function, this would now be undefined in strict mode\n    setTimeout(() => {\n      this.busy = false;\n      console.log(this.arr.shift());\n      if (this.arr.length) this.print();\n    }, this.timer);\n  };\n}\nnew SlowPrinter(evenKeys, 25).print();\n````\n"
         },
         {
-          "title": "Template strings",
+          "title": "Template literals",
           "description": "Interpolation, multiline strings, quick transformations",
-          "body": "`````\n// Backtics enclose a template string; ${} interpolates arbitrary expressions\nlet num = 99; // see block scope\nconsole.log(`${num} bottles of beer on the wall, ${num} bottles of beer\nTake one down and pass it around, ${--num} bottles of beer!`);\n\n// Tagged form: Attach a function that processes string fragments and evaluated\n// expressions\nfunction celsius(strings, ...values) {\n  let rv = '';\n  strings.forEach((string, index) => { // See arrow functions\n    rv += string;\n    if (typeof values[index] !== 'undefined')\n      rv += Math.round((values[index] - 32) / 1.8);\n  });\n  return rv;\n}\n\n// Converts all the interpolated numbers to the proper unit\nconsole.log(celsius `Today temperatures ranged from ${60} to ${65} degrees.`);\n`````"
+          "body": "`````\n// Backticks enclose a template literal; ${} interpolates arbitrary expressions\nlet num = 99; // see block scope\nconsole.log(`${num} bottles of beer on the wall, ${num} bottles of beer\nTake one down and pass it around, ${--num} bottles of beer!`);\n\n// Tagged form: Attach a function that processes string fragments and evaluated\n// expressions\nfunction celsius(strings, ...values) {\n  let rv = '';\n  strings.forEach((string, index) => { // See arrow functions\n    rv += string;\n    if (typeof values[index] !== 'undefined')\n      rv += Math.round((values[index] - 32) / 1.8);\n  });\n  return rv;\n}\n\n// Converts all the interpolated numbers to the proper unit\nconsole.log(celsius `Today temperatures ranged from ${60} to ${65} degrees.`);\n`````"
         },
         {
           "title": "Classes",
-          "description": "Syntactic sugar for your prototype chains",
+          "description": "Syntactic sugar for constructors",
           "body": "````\nclass Monster {\n  constructor() {\n    this.maxDamage = 5;\n    this.icon = '%';\n  }\n  bite(victim) { // same as Monster.prototype.bite\n    console.log(this.icon + ' bites!');\n    this._dmg(victim);\n  }\n  _dmg(victim, maxDamage = this.maxDamage) { // ES6 feature: default value\n    let dmg = Math.floor(Math.random() * maxDamage + 1);\n    victim.hp -= dmg;\n    console.log('You suffer ' + dmg + ' points of damage.');\n  }\n}\n\n// Using extends here has the same effect as:\n// Rat.prototype = Object.create(Monster.prototype);\n// Rat.prototype.constructor = Rat;\nclass Rat extends Monster {\n  constructor() {\n    super(); // same as Monster.call(this)\n    this.icon = 'r';\n  }\n  breathe(victim) {\n    if (victim.distance < 2) {\n      console.log(this.icon + ' is using its proximity breathing attack!');\n      this._dmg(victim, 3);\n    }\n  }\n}\n\nlet rat = new Rat();\nlet hero = {\n  hp: 20,\n  distance: 1\n};\nrat.bite(hero);\nrat.breathe(hero);\n````\n"
         },
         {
@@ -62,7 +67,7 @@
           "body": "````\n// A generator function will return an object that implements the iteration\n// protocol, i.e., it has a next() method that returns\n// { value: < some value>, done: <true or false> }\nfunction* incRand(max) { // Asterisk defines this as a generator function\n  while (true) {\n    // Pause execution after the yield, resume when next(<something>) is called\n    // and assign <something> to x\n    let x = yield Math.floor(Math.random() * max + 1);\n    max += x;\n  }\n}\nvar rng = incRand(2); // Now we have a generator object to work with\nconsole.log(rng.next()); // { value: <between 1 and 2>, done: false }\nconsole.log(rng.next(3)); // as above, but between 1 and 5\nconsole.log(rng.next()); // as above, but NaN since 5 + undefined results in NaN\nconsole.log(rng.next(20)); // Oops, looks like we broke it! NaN again.\nrng.throw(new Error('Unrecoverable generator state.')); // Will be thrown from yield\n````"
         },
         {
-          "title": "Object literal shorthand",
+          "title": "Property value shorthand",
           "description": "Don't repeat yourself",
           "body": "````\nvar firstName = 'Grover';\nvar lastName = 'Cleveland';\nvar person = { firstName, lastName }; // Same as firstName: firstName, lastName: lastName\nconsole.log(person.lastName); // 'Cleveland'\n````"
         }
