@@ -29,7 +29,7 @@
         {
           "title": "Free ES6 resources",
           "description": "",
-          "body": "- [“Understanding ECMAScript 6”](https://leanpub.com/understandinges6/read/) by Nicholas C. Zakas\n- [“Exploring ES6”](http://exploringjs.com/es6/) by Axel Rauschmayer\n- [“JavaScript Allongé, the \"Six\" Edition”](https://leanpub.com/javascriptallongesix/read) by Reg “raganwald” Braithwaite\n- [“You Don't Know JS: ES6 & Beyond”](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/README.md#you-dont-know-js-es6--beyond) by Kyle “getify” Simpson"
+          "body": "- [“Understanding ECMAScript 6”](https://leanpub.com/understandinges6/read/) by Nicholas C. Zakas\n- [“Exploring ES6”](http://exploringjs.com/es6/) by Axel Rauschmayer\n- [“JavaScript Allongé, the \"Six\" Edition”](https://leanpub.com/javascriptallongesix/read) by Reg “raganwald” Braithwaite\n- [“You Don't Know JS: ES6 & Beyond”](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/README.md#you-dont-know-js-es6--beyond) by Kyle “getify” Simpson\n- [“JavaScript Iterators and Generators“](http://www.ociweb.com/resources/publications/sett/javascript-iterators-and-generators/) by R. Mark Volkmann"
         },
         {
           "title": "Block scope",
