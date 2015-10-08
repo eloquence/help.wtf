@@ -24,7 +24,7 @@
       "content": [
         {
           "title": "Get ES6",
-          "body": "- Official name: ECMAScript 2016\n- It's the latest version of JavaScript, also known as ES2015.\n- The [spec](http://www.ecma-international.org/ecma-262/6.0/) is finalized.\n- It's [incrementally](https://kangax.github.io/compat-table/es6/) making its way into browsers.\n- [Node.js](http://nodejs.org/) as of V4 has picked up much of it.\n- [babel.js](https://babeljs.io/) can be used for older browsers, and includes a babel-node environment w/ REPL.\n\nAll examples herein have been tested in babel-node and *may not work* in incomplete ES6 implementations."
+          "body": "- Official name: ECMAScript 2015\n- It's the latest version of JavaScript, also known as ES2015.\n- The [spec](http://www.ecma-international.org/ecma-262/6.0/) is finalized.\n- It's [incrementally](https://kangax.github.io/compat-table/es6/) making its way into browsers.\n- [Node.js](http://nodejs.org/) as of V4 has picked up much of it.\n- [babel.js](https://babeljs.io/) can be used for older browsers, and includes a babel-node environment w/ REPL.\n\nAll examples herein have been tested in babel-node and *may not work* in incomplete ES6 implementations."
         },
         {
           "title": "Free ES6 resources",
