@@ -19,3 +19,6 @@ To install locally:
 - Run `npm install` to fetch required dependencies
 - `node index.js [port]` to launch the service (default port is 8000)
 - Use gulp to launch under nodemon if so desired.
+
+Ensure the queue/ directory is writable by the node process if you'd like
+to accept submissions through the /_compose command.
