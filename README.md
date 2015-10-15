@@ -13,3 +13,9 @@ help.wtf is pretty minimalist:
 
 Want to contribute your own cheatsheets? Visit http://help.wtf/_compose to use
 the composer, or just submit a pull request.
+
+To install locally:
+- You need Node.js 4+ since we're using fancy ES6 features
+- Run `npm install` to fetch required dependencies
+- `node index.js [port]` to launch the service (default port is 8000)
+- Use gulp to launch under nodemon if so desired.
