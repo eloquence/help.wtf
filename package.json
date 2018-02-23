@@ -16,7 +16,7 @@
   "author": "Erik Moeller",
   "license": "CC0-1.0",
   "dependencies": {
-    "chokidar": "^1.0.5",
+    "chokidar": "^2.0.0",
     "co-body": "^5.0.0",
     "ejs": "^2.3.3",
     "ent": "^2.2.0",
